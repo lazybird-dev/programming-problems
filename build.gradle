@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'io.lazybird'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'ch.qos.logback:logback-classic:1.3.0-alpha5'
+    testImplementation(platform('org.junit:junit-bom:5.7.0'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation("org.assertj:assertj-core:3.18.1")
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
