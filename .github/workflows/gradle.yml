@@ -5,7 +5,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ dev, master ]
+    branches: [ dev, master, geeksforgeeks.org ]
   pull_request:
     branches: [ master ]
     types: [opened, synchronize, reopened]
