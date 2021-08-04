@@ -1,23 +1,25 @@
-# Java Gradle Starter
+# Programming Problems
 
 **TnC**
 - Overview
-- Logging Setup
-- Testing Framework Setup
+- Project Setup
+  - Logging Setup
+  - Unit Test Support
 - References
 
 ## Overview
-Java starter project based on gradle. It can be used as idea project template
- or be directly used to start a new java project.
+Programming Problems on data structures & algorithms. 
  
-## Logging Setup 
+## Project Setup
+
+### Logging Setup 
 Project relies on logback logging framework. 
 The [Logback Dependency] to logback-classic pulls logback-core.jar and slf4j-api.jar as well.
 
 [Logback Configuration] is provided by logback.xml under the main resources.
 By default, project uses 'debug' level logging which can be changed to other levels either in the file or by using a command live override.
  
-## Unit Test Support
+### Unit Test Support
 
 **JUnit 5 Integration**\
 build.gradle is updated based on sample project at https://github.com/junit-team/junit5-samples/tree/r5.7.0/junit5-jupiter-starter-gradle
