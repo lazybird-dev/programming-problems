@@ -1,6 +1,5 @@
 package io.lazybird.programmingproblems.gfg.array;
 
-import static io.lazybird.programmingproblems.gfg.array.ArrayRotation.rotateArrayOneByOne;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -13,10 +12,18 @@ class ArrayRotationTest {
 
   @ParameterizedTest
   @MethodSource("testCasesForArrayRotation")
-  void testRotateArrayOneByOne(int[] actualArray, int rotateBy,
+  void oneByOne(int[] actualArray, int rotateBy,
       int[] expectedArray) {
-//    assertThat(actualArray).isNotNull().isNotEmpty();
-    assertThat(rotateArrayOneByOne(actualArray, rotateBy)).containsExactly(
+    assertThat(ArrayRotation.oneByOne(actualArray, rotateBy)).containsExactly(
+        expectedArray);
+  }
+
+  @ParameterizedTest
+  @MethodSource("testCasesForArrayRotation")
+  void usingTempArray(int[] actualArray, int rotateBy,
+      int[] expectedArray) {
+    assertThat(
+        ArrayRotation.usingTempArray(actualArray, rotateBy)).containsExactly(
         expectedArray);
   }
 
@@ -33,4 +40,13 @@ class ArrayRotationTest {
 
   }
 
+
+  @ParameterizedTest
+  @MethodSource("testCasesForArrayRotation")
+  void byJugglingMethod(int[] actualArray, int rotateBy,
+      int[] expectedArray) {
+    assertThat(
+        ArrayRotation.byJugglingMethod(actualArray, rotateBy)).containsExactly(
+        expectedArray);
+  }
 }
