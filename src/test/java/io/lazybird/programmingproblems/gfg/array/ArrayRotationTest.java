@@ -49,4 +49,14 @@ class ArrayRotationTest {
         ArrayRotation.byJugglingMethod(actualArray, rotateBy)).containsExactly(
         expectedArray);
   }
+
+  @ParameterizedTest
+  @MethodSource("testCasesForArrayRotation")
+  void usingReversalAlgorithm(int[] actualArray, int rotateBy,
+      int[] expectedArray) {
+    assertThat(
+        ArrayRotation.usingReversalAlgorithm(actualArray,
+            rotateBy)).containsExactly(
+        expectedArray);
+  }
 }

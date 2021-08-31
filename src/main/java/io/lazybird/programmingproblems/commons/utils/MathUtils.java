@@ -8,9 +8,12 @@ public class MathUtils {
   /**
    * Finds the greatest common divisor of two non-zero numbers.
    *
-   * @return gcd of x & y
+   * @param x first number
+   * @param y second number
+   * @return greatest common divisor of x &amp; y.
+   * @throws IllegalArgumentException if any of the passed number is 0.
    */
-  public static int gcd(int x, int y) throws IllegalArgumentException {
+  public static int gcd(int x, int y) {
 
     if (x == 0 || y == 0) {
       throw new IllegalArgumentException(

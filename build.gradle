@@ -26,6 +26,12 @@ java {
     }
 }
 
+javadoc {
+    doLast {
+        println "JavaDoc Location" + destinationDir.getAbsolutePath()
+    }
+}
+
 test {
     useJUnitPlatform()
     testLogging {

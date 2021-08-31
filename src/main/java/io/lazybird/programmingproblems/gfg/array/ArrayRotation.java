@@ -2,6 +2,7 @@ package io.lazybird.programmingproblems.gfg.array;
 
 import io.lazybird.programmingproblems.commons.annotations.DifficultyLevel;
 import io.lazybird.programmingproblems.commons.annotations.ProgrammingProblem;
+import io.lazybird.programmingproblems.commons.utils.ArrayUtils;
 import io.lazybird.programmingproblems.commons.utils.MathUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -124,6 +125,29 @@ public class ArrayRotation {
       }
       array[j] = temp;
     }
+
+    return array;
+  }
+
+  /**
+   * Rotate array using array reversal algorithm.
+   *
+   * @param array    to be rotated
+   * @param rotateBy number of places to be rotated.
+   * @return rotated array
+   */
+  public static int[] usingReversalAlgorithm(int[] array, int rotateBy) {
+
+    if (array == null || array.length <= 1
+        || (rotateBy = rotateBy % array.length) == 0) {
+      return array;
+    }
+
+    _LOGGER.debug("Rotating array by {}", rotateBy);
+
+    ArrayUtils.reverseArray(array, 0, rotateBy - 1);
+    ArrayUtils.reverseArray(array, rotateBy, array.length - 1);
+    ArrayUtils.reverseArray(array, 0, array.length - 1);
 
     return array;
   }
