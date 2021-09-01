@@ -70,4 +70,24 @@ class ArrayRotationTest {
         expectedArray);
   }
 
+  @ParameterizedTest
+  @MethodSource("searchElementInRotatedSortedArray")
+  void testSearchElementInRotatedSortedArray(int[] array, int element,
+      int elementIndex) {
+    assertThat(ArrayRotation.searchElementInRotatedSortedArray(array,
+        element)).isEqualTo(elementIndex);
+  }
+
+  static Stream<Arguments> searchElementInRotatedSortedArray() {
+
+    return Stream.of(arguments(new int[]{1, 2, 3, 4, 5}, 1, 0),
+        arguments(new int[]{1, 2, 3, 4, 5}, 3, 2),
+        arguments(new int[]{1, 2, 3, 4, 5}, 0, -1),
+        arguments(new int[]{3, 4, 5, 1, 2}, 1, 3),
+        arguments(new int[]{3, 4, 5, 1, 2}, 4, 1),
+        arguments(new int[]{3, 4, 5, 1, 2}, 5, 2),
+        arguments(new int[]{3, 4, 5, 1, 2}, 6, -1)
+    );
+
+  }
 }

@@ -1,6 +1,7 @@
 package io.lazybird.programmingproblems.gfg.array;
 
-import io.lazybird.programmingproblems.commons.annotations.DifficultyLevel;
+import static io.lazybird.programmingproblems.commons.annotations.DifficultyLevel.BEGINNER;
+
 import io.lazybird.programmingproblems.commons.annotations.ProgrammingProblem;
 import io.lazybird.programmingproblems.commons.utils.ArrayUtils;
 import io.lazybird.programmingproblems.commons.utils.MathUtils;
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 /**
  * Problems on array rotation.
@@ -33,14 +35,14 @@ public class ArrayRotation {
    * @return rotated array
    */
   @SuppressWarnings("ManualArrayCopy")
-  @ProgrammingProblem(title = "Array Rotation", sources = "https://www.geeksforgeeks.org/array-rotation/",
-      tags = {"array", "rotation"}, difficultyLevel = DifficultyLevel.BEGINNER)
+  @ProgrammingProblem(title = "Array Rotation", sources = {
+      "https://www.geeksforgeeks.org/array-rotation/",
+      "https://www.geeksforgeeks.org/c-program-cyclically-rotate-array-one/"},
+      tags = {"array", "rotation"}, difficultyLevel = BEGINNER)
   public static int[] oneByOne(@NotNull int[] array, int rotateBy) {
 
-    if (_LOGGER.isDebugEnabled()) {
-      _LOGGER.debug("Input: array={}, rotateBy={}",
-          Arrays.toString(array), rotateBy);
-    }
+    _LOGGER.atDebug().log("Input: array={}, rotateBy={}",
+        Arrays.toString(array), rotateBy);
 
     if (array.length <= 1 || (rotateBy = rotateBy % array.length) == 0) {
       return array;
@@ -74,10 +76,8 @@ public class ArrayRotation {
    */
   public static int[] usingTempArray(@NotNull int[] array, int rotateBy) {
 
-    if (_LOGGER.isDebugEnabled()) {
-      _LOGGER.debug("Input: array={}, rotateBy={}",
-          Arrays.toString(array), rotateBy);
-    }
+    _LOGGER.atDebug().log("Input: array={}, rotateBy={}",
+        Arrays.toString(array), rotateBy);
 
     if (array.length <= 1 || (rotateBy = rotateBy % array.length) == 0) {
       return array;
@@ -113,10 +113,8 @@ public class ArrayRotation {
    */
   public static int[] byJugglingMethod(@NotNull int[] array, int rotateBy) {
 
-    if (_LOGGER.isDebugEnabled()) {
-      _LOGGER.debug("Input: array={}, rotateBy={}",
-          Arrays.toString(array), rotateBy);
-    }
+    _LOGGER.atDebug().log("Input: array={}, rotateBy={}",
+        Arrays.toString(array), rotateBy);
 
     if (array.length <= 1 || (rotateBy = rotateBy % array.length) == 0) {
       return array;
@@ -148,10 +146,8 @@ public class ArrayRotation {
   public static int[] usingReversalAlgorithm(@NotNull int[] array,
       int rotateBy) {
 
-    if (_LOGGER.isDebugEnabled()) {
-      _LOGGER.debug("Input: array={}, rotateBy={}",
-          Arrays.toString(array), rotateBy);
-    }
+    _LOGGER.atDebug().log("Input: array={}, rotateBy={}",
+        Arrays.toString(array), rotateBy);
 
     if (array.length <= 1 || (rotateBy = rotateBy % array.length) == 0) {
       return array;
@@ -190,6 +186,48 @@ public class ArrayRotation {
         array.length - 1);
 
     return array;
+  }
+
+  /**
+   * Returns index of the passed element or -1 if element doesn't exist in
+   * rotated sorted array.
+   *
+   * @param array   to be searched.
+   * @param element to be searched.
+   * @return index of the element or -1 if not found.
+   */
+  @ProgrammingProblem(title = "Search an element in a sorted and rotated array",
+      sources = "https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/",
+      difficultyLevel = BEGINNER)
+  public static int searchElementInRotatedSortedArray(@NotNull int[] array,
+      int element) {
+
+    _LOGGER.atDebug()
+        .log("Inputs: array={}, element={}", Arrays.toString(array), element);
+
+    //TODO - Analyze scenarios for duplicate elements
+    int s = 0;
+    int e = array.length - 1;
+    int m;
+
+    while (s < e) {
+
+      m = s + (e - s) / 2;
+      _LOGGER.atDebug()
+          .log("s={}, e={}, m={}", s, e, m);
+      if (array[m] == element) {
+        return m;
+      }
+      if ((array[s] < array[e] || (array[s] <= array[m]))
+          && (array[s] <= element && element < array[m])) {
+        e = m;
+      } else {
+        s = m + 1;
+      }
+    }
+
+    //element not found in the array.
+    return -1;
   }
 
   /**
