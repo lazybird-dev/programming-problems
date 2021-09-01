@@ -13,7 +13,7 @@ public class ArrayUtils {
    */
   public static void reverseArray(int[] array) {
 
-    if (array == null || array.length <= 1) {
+    if (array.length <= 1) {
       return;
     }
     reverseArray(array, 0, array.length);
@@ -30,7 +30,7 @@ public class ArrayUtils {
    */
   public static void reverseArray(int[] array, int s, int e) {
 
-    if (array == null || array.length <= 1) {
+    if (array.length <= 1) {
       return;
     }
 

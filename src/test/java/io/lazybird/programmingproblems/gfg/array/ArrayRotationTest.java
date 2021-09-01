@@ -59,4 +59,15 @@ class ArrayRotationTest {
             rotateBy)).containsExactly(
         expectedArray);
   }
+
+  @ParameterizedTest
+  @MethodSource("testCasesForArrayRotation")
+  void blockSwapAlgorithm(int[] actualArray, int rotateBy,
+      int[] expectedArray) {
+    assertThat(
+        ArrayRotation.blockSwapAlgorithm(actualArray,
+            rotateBy)).containsExactly(
+        expectedArray);
+  }
+
 }

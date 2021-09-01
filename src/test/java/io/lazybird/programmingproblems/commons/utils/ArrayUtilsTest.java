@@ -1,9 +1,9 @@
 package io.lazybird.programmingproblems.gfg.array;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import io.lazybird.programmingproblems.commons.utils.ArrayUtils;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

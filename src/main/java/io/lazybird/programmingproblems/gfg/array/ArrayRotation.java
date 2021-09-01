@@ -33,14 +33,16 @@ public class ArrayRotation {
   @SuppressWarnings("ManualArrayCopy")
   @ProgrammingProblem(title = "Array Rotation", sources = "https://www.geeksforgeeks.org/array-rotation/",
       tags = {"array", "rotation"}, difficultyLevel = DifficultyLevel.BEGINNER)
-  public static int[] oneByOne(int[] array, int rotateBy) {
+  public static int[] oneByOne(@NotNull int[] array, int rotateBy) {
 
-    if (array == null || array.length <= 1
-        || (rotateBy = rotateBy % array.length) == 0) {
-      return array;
+    if (_LOGGER.isDebugEnabled()) {
+      _LOGGER.debug("Input: array={}, rotateBy={}",
+          Arrays.toString(array), rotateBy);
     }
 
-    _LOGGER.debug("Rotating array by {}", rotateBy);
+    if (array.length <= 1 || (rotateBy = rotateBy % array.length) == 0) {
+      return array;
+    }
 
     int temp;
     while (rotateBy > 0) {
@@ -68,13 +70,16 @@ public class ArrayRotation {
    * @param rotateBy no of elements to be rotated
    * @return rotated array
    */
-  public static int[] usingTempArray(int[] array, int rotateBy) {
+  public static int[] usingTempArray(@NotNull int[] array, int rotateBy) {
 
-    if (array == null || array.length <= 1
-        || (rotateBy = rotateBy % array.length) == 0) {
+    if (_LOGGER.isDebugEnabled()) {
+      _LOGGER.debug("Input: array={}, rotateBy={}",
+          Arrays.toString(array), rotateBy);
+    }
+
+    if (array.length <= 1 || (rotateBy = rotateBy % array.length) == 0) {
       return array;
     }
-    _LOGGER.debug("Rotating array by {}", rotateBy);
 
     int[] tempArray = new int[rotateBy];
 
@@ -104,14 +109,16 @@ public class ArrayRotation {
    * @param rotateBy no of elements to be rotated
    * @return rotated array
    */
-  public static int[] byJugglingMethod(int[] array, int rotateBy) {
+  public static int[] byJugglingMethod(@NotNull int[] array, int rotateBy) {
 
-    if (array == null || array.length <= 1
-        || (rotateBy = rotateBy % array.length) == 0) {
-      return array;
+    if (_LOGGER.isDebugEnabled()) {
+      _LOGGER.debug("Input: array={}, rotateBy={}",
+          Arrays.toString(array), rotateBy);
     }
 
-    _LOGGER.debug("Rotating array by {}", rotateBy);
+    if (array.length <= 1 || (rotateBy = rotateBy % array.length) == 0) {
+      return array;
+    }
 
     int gcd = MathUtils.gcd(array.length, rotateBy);
 
@@ -136,14 +143,17 @@ public class ArrayRotation {
    * @param rotateBy number of places to be rotated.
    * @return rotated array
    */
-  public static int[] usingReversalAlgorithm(int[] array, int rotateBy) {
+  public static int[] usingReversalAlgorithm(@NotNull int[] array,
+      int rotateBy) {
 
-    if (array == null || array.length <= 1
-        || (rotateBy = rotateBy % array.length) == 0) {
-      return array;
+    if (_LOGGER.isDebugEnabled()) {
+      _LOGGER.debug("Input: array={}, rotateBy={}",
+          Arrays.toString(array), rotateBy);
     }
 
-    _LOGGER.debug("Rotating array by {}", rotateBy);
+    if (array.length <= 1 || (rotateBy = rotateBy % array.length) == 0) {
+      return array;
+    }
 
     ArrayUtils.reverseArray(array, 0, rotateBy - 1);
     ArrayUtils.reverseArray(array, rotateBy, array.length - 1);
