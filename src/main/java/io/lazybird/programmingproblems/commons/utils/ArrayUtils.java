@@ -1,5 +1,8 @@
 package io.lazybird.programmingproblems.commons.utils;
 
+
+import javax.validation.constraints.NotNull;
+
 public class ArrayUtils {
 
   private ArrayUtils() {
@@ -11,7 +14,7 @@ public class ArrayUtils {
    *
    * @param array to be reversed
    */
-  public static void reverseArray(int[] array) {
+  public static void reverseArray(@NotNull int[] array) {
 
     if (array.length <= 1) {
       return;
@@ -28,7 +31,7 @@ public class ArrayUtils {
    * @param e     end index of the sequence which is always <code>=&gt;s</code>
    *              &amp; <code> &lt;array.length</code>
    */
-  public static void reverseArray(int[] array, int s, int e) {
+  public static void reverseArray(@NotNull int[] array, int s, int e) {
 
     if (array.length <= 1) {
       return;

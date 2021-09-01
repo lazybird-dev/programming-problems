@@ -4,6 +4,8 @@ import io.lazybird.programmingproblems.commons.annotations.DifficultyLevel;
 import io.lazybird.programmingproblems.commons.annotations.ProgrammingProblem;
 import io.lazybird.programmingproblems.commons.utils.ArrayUtils;
 import io.lazybird.programmingproblems.commons.utils.MathUtils;
+import java.util.Arrays;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -161,5 +163,112 @@ public class ArrayRotation {
 
     return array;
   }
+
+  /**
+   * Block swap algorithm to rotate array elements.
+   *
+   * @param array    to be rotated.
+   * @param rotateBy number of elements to be rotated.
+   * @return rotated array
+   */
+  public static int[] blockSwapAlgorithm(@NotNull int[] array, int rotateBy) {
+
+    //https://rules.sonarsource.com/java/RSPEC-2629
+    if (_LOGGER.isDebugEnabled()) {
+      _LOGGER.debug(
+          "Inputs: array={}, rotateBy={}", Arrays.toString(array), rotateBy);
+    }
+
+    if (array.length <= 1) {
+      return array;
+    }
+    if ((rotateBy = rotateBy % array.length) == 0) {
+      return array;
+    }
+
+    helperBlockSwapAlgorithm(array, 0, rotateBy - 1, rotateBy,
+        array.length - 1);
+
+    return array;
+  }
+
+  /**
+   * Recursive Helper method implementing block swap algorithm. All indices to
+   * the method are inclusive.
+   *
+   * @param array to be rotated
+   * @param s1    starting index of left array
+   * @param e1    end index of left array
+   * @param s2    starting index of right array
+   * @param e2    end index of right array
+   */
+  private static void helperBlockSwapAlgorithm(@NotNull int[] array, int s1,
+      int e1, int s2, int e2) {
+
+    _LOGGER.debug(
+        "Calling helperBlockSwapAlgorithm with s1={}, e1={}, s2={}, e2={}", s1,
+        e1, s2, e2);
+
+    int leftArrayLength = e1 - s1 + 1;
+    int rightArrayLength = e2 - s2 + 1;
+
+    if (leftArrayLength < rightArrayLength) {
+
+      swap(array, s1, e2 - leftArrayLength + 1, leftArrayLength);
+      helperBlockSwapAlgorithm(array, s1, s1 + leftArrayLength - 1,
+          s1 + leftArrayLength, e2 - leftArrayLength);
+
+    } else if (leftArrayLength > rightArrayLength) {
+
+      swap(array, s1, e2 - rightArrayLength + 1, rightArrayLength);
+      helperBlockSwapAlgorithm(array, s1 + rightArrayLength,
+          s1 + 2 * rightArrayLength,
+          s1 + 2 * rightArrayLength + 1, e2);
+
+    } else {
+      swap(array, s1, s2, leftArrayLength);
+    }
+  }
+
+  /**
+   * Swap two array sequence of length l.
+   *
+   * @param array which element sequences need to be swapped.
+   * @param i1    starting index of first sequence.
+   * @param i2    starting index of second sequence.
+   * @param l     length of the sequence.
+   */
+  private static void swap(@NotNull int[] array, int i1, int i2, int l) {
+
+    if (_LOGGER.isDebugEnabled()) {
+      _LOGGER.debug("Inputs: array={}, i1={}, i2={}, l={}",
+          Arrays.toString(array),
+          i1, i2, l);
+    }
+
+    assert l >= 0 : String.format("Invalid sequence length, l=%d", l);
+    assert
+        i1 >= 0 && i2 > i1 + l - 1 : String.format(
+        "Overlapping sequence i1=%d, i2=%d, l=%d", i1,
+        i2, l);
+    assert
+        i2 + l - 1 < array.length : String.format("invalid sequence, l=%d",
+        l);
+
+    int temp;
+    int i = 0;
+
+    while (i < l) {
+      temp = array[i2 + i];
+      array[i2 + i] = array[i1 + i];
+      array[i1 + i] = temp;
+      i++;
+    }
+
+    if (_LOGGER.isDebugEnabled()) {
+      _LOGGER.debug("Output array={}", Arrays.toString(array));
+    }
+  }
+
 
 }
