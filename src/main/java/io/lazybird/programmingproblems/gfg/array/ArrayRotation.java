@@ -346,8 +346,8 @@ public class ArrayRotation {
    * @param array of integers.
    * @return number of clockwise rotation.
    */
-  public static int rotationCountInRotatedSortedArray(@NotNull int[] array) {
-    if (array.length <= 1) {
+  public static int rotationCountInRotatedSortedArray(@NotEmpty int[] array) {
+    if (array.length == 1) {
       return 0;
     }
     int s = 0;
@@ -372,6 +372,97 @@ public class ArrayRotation {
       }
     }
     return m;
+  }
+
+  /**
+   * Rotate array without creating a new array.
+   *
+   * @param array    of integers
+   * @param rotateBy places by which array to be left rotated.
+   * @return rotated array
+   */
+  public static int[] findMultipleLeftRotationOfArray(@NotNull int[] array,
+      int rotateBy) {
+
+    if (array.length <= 1) {
+      return array;
+    }
+
+    rotateBy = rotateBy % array.length;
+    if (rotateBy == 0) {
+      return array;
+    }
+
+    int[] rotatedArray = new int[array.length];
+
+    for (int i = rotateBy; i < rotateBy + array.length; i++) {
+      rotatedArray[i - rotateBy] = array[i % array.length];
+    }
+    return rotatedArray;
+  }
+
+  /**
+   * https://www.geeksforgeeks.org/find-minimum-element-in-a-sorted-and-rotated-array/
+   * Returns the minimum element of a rotated sorted array. Array must not have
+   * duplicate elements.
+   *
+   * @param array rotated and sorted array without any duplicates
+   * @return minimum element of the array
+   */
+  public static int minimumInRotatedSortedArray(@NotEmpty int[] array) {
+
+    if (array.length == 1) {
+      return array[0];
+    }
+
+    int s = 0;
+    int e = array.length - 1;
+    int m = Integer.MIN_VALUE;
+    while (s < e) {
+
+      if (array[s] < array[e]) {
+        return array[s];
+      }
+
+      m = s + (e - s) / 2;
+
+      if (array[m] > array[m + 1]) {
+        return array[m + 1];
+      }
+
+      if (array[s] < array[m]) {
+        s = m;
+      } else {
+        e = m;
+      }
+    }
+    return m;
+  }
+
+  /**
+   * A rotation with maximum hamming distance.
+   *
+   * @param array of integers
+   * @return maximum hamming distance of all possible array rotation.
+   */
+  public static int rotationWithMaximumHammingDistance(@NotEmpty int[] array) {
+
+    int hammingDistance = Integer.MIN_VALUE;
+
+    for (int i = 1; i < array.length - 1; i++) {
+      int currentDistant = 0;
+
+      for (int j = 0; j < array.length; j++) {
+        if (array[j] != array[(j + i) % array.length]) {
+          currentDistant += 1;
+        }
+      }
+
+      if (currentDistant > hammingDistance) {
+        hammingDistance = currentDistant;
+      }
+    }
+    return hammingDistance;
   }
 
 

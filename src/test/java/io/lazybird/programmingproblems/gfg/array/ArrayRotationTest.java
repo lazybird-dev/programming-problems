@@ -137,8 +137,7 @@ class ArrayRotationTest {
         arguments(new int[]{4, 5, 1, 2, 3}, 2),
         arguments(new int[]{1, 2}, 0),
         arguments(new int[]{2, 1}, 1),
-        arguments(new int[]{1}, 0),
-        arguments(new int[]{}, 0)
+        arguments(new int[]{1}, 0)
     );
 
   }
@@ -149,5 +148,42 @@ class ArrayRotationTest {
     assertThat(
         ArrayRotation.rotationCountInRotatedSortedArray(array)).isEqualTo(
         rotationCount);
+  }
+
+  @ParameterizedTest
+  @MethodSource("testCasesForArrayRotation")
+  void findMultipleLeftRotationOfArray(int[] actualArray, int rotateBy,
+      int[] expectedArray) {
+    assertThat(ArrayRotation.findMultipleLeftRotationOfArray(actualArray,
+        rotateBy)).containsExactly(
+        expectedArray);
+  }
+
+  @ParameterizedTest
+  @MethodSource("rotationCountInRotatedSortedArray")
+  void minimumInRotatedSortedArray(int[] array, int pivotalIndex) {
+    assertThat(ArrayRotation.minimumInRotatedSortedArray(array)).isEqualTo(
+        array[pivotalIndex]);
+  }
+
+  static Stream<Arguments> rotationWithMaximumHammingDistance() {
+
+    return Stream.of(arguments(new int[]{1, 2, 3, 4, 5}, 5),
+        arguments(new int[]{1, 2, 3, 5, 1}, 5),
+        arguments(new int[]{1, 1, 1, 1, 1, 1}, 0),
+        arguments(new int[]{1, 2, 1}, 2),
+        arguments(new int[]{1, 2, 1, 2}, 4),
+        arguments(new int[]{3, 0, 6, 4, 3}, 5)
+    );
+
+  }
+
+  @ParameterizedTest
+  @MethodSource("rotationWithMaximumHammingDistance")
+  void rotationWithMaximumHammingDistance(int[] array,
+      int actualHammingDistance) {
+    assertThat(
+        ArrayRotation.rotationWithMaximumHammingDistance(array)).isEqualTo(
+        actualHammingDistance);
   }
 }
