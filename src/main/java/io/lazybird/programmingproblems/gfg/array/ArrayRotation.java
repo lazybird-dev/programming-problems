@@ -465,5 +465,65 @@ public class ArrayRotation {
     return hammingDistance;
   }
 
+  /**
+   * https://www.geeksforgeeks.org/queries-left-right-circular-shift-array/
+   *
+   * @param array   of integer
+   * @param queries queries to be performed on array
+   * @return sum of the elements over a range.
+   */
+  public static int queriesOnArray(@NotEmpty int[] array,
+      @NotEmpty int[][] queries) {
+
+    int totalSum = 0;
+    int s = 0;
+
+    for (int[] query : queries) {
+      switch (query[0]) {
+        case 1:
+          s = Math.floorMod(s - query[1], array.length);
+          break;
+
+        case 2:
+          s = Math.floorMod(s + query[1], array.length);
+          break;
+
+        case 3:
+          int range = query[2] - query[1];
+          int startIndex = (s % array.length) + query[1];
+
+          for (int i = startIndex; i <= range + startIndex; i++) {
+            totalSum += array[i % array.length];
+          }
+          break;
+        default:
+          throw new AssertionError(
+              String.format("Invalid query %s", Arrays.toString(query)));
+      }
+    }
+    return totalSum;
+  }
+
+  /**
+   * Split the array in two parts and attach first part to the end of second
+   * part.
+   *
+   * @param array   of integers to be split.
+   * @param splitBy first-half length
+   * @return resulting array
+   */
+  public static int[] splitFirstPartAndAddItToBack(@NotEmpty int[] array,
+      int splitBy) {
+
+    if (splitBy == 0 || array.length == splitBy) {
+      return array;
+    }
+    ArrayUtils.reverseArray(array, 0, splitBy - 1);
+    ArrayUtils.reverseArray(array, splitBy, array.length - 1);
+    ArrayUtils.reverseArray(array, 0, array.length - 1);
+
+    return array;
+  }
+
 
 }

@@ -186,4 +186,45 @@ class ArrayRotationTest {
         ArrayRotation.rotationWithMaximumHammingDistance(array)).isEqualTo(
         actualHammingDistance);
   }
+
+  static Stream<Arguments> queriesOnArray() {
+
+    return Stream.of(
+        arguments(new int[]{1, 2, 3, 4, 5},
+            new int[][]{{1, 3}, {2, 3}, {3, 0, 4}}, 15),
+        arguments(new int[]{1, 2, 3, 4, 5},
+            new int[][]{{1, 3}, {1, 1}, {3, 0, 1}}, 5),
+        arguments(new int[]{1, 2, 3, 4, 5},
+            new int[][]{{2, 3}, {1, 1}, {3, 0, 3}}, 13)
+    );
+
+  }
+
+  @ParameterizedTest
+  @MethodSource("queriesOnArray")
+  void queriesOnArray(int[] array, int[][] queries, int expectedSum) {
+    assertThat(ArrayRotation.queriesOnArray(array, queries)).isEqualTo(
+        expectedSum);
+  }
+
+  static Stream<Arguments> splitFirstPartAndAddItToBack() {
+
+    return Stream.of(
+        arguments(new int[]{1, 2}, 0, new int[]{1, 2}),
+        arguments(new int[]{1, 2}, 1, new int[]{2, 1}),
+        arguments(new int[]{1, 2}, 2, new int[]{1, 2}),
+        arguments(new int[]{1, 2, 3, 4, 5}, 3, new int[]{4, 5, 1, 2, 3}),
+        arguments(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, 3,
+            new int[]{4, 5, 6, 7, 8, 9, 10, 1, 2, 3})
+    );
+
+  }
+
+  @ParameterizedTest
+  @MethodSource("splitFirstPartAndAddItToBack")
+  void splitFirstPartAndAddItToBack(int[] array, int splitBy,
+      int[] expectedArray) {
+    assertThat(ArrayRotation.splitFirstPartAndAddItToBack(array,
+        splitBy)).containsExactly(expectedArray);
+  }
 }
