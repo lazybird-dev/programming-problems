@@ -128,4 +128,26 @@ class ArrayRotationTest {
     assertThat(ArrayRotation.maxOfPositionalSum(array)).isEqualTo(maxSum);
 
   }
+
+  static Stream<Arguments> rotationCountInRotatedSortedArray() {
+
+    return Stream.of(arguments(new int[]{1, 2, 3, 4, 5}, 0),
+        arguments(new int[]{2, 3, 4, 5, 1}, 4),
+        arguments(new int[]{3, 4, 5, 1, 2}, 3),
+        arguments(new int[]{4, 5, 1, 2, 3}, 2),
+        arguments(new int[]{1, 2}, 0),
+        arguments(new int[]{2, 1}, 1),
+        arguments(new int[]{1}, 0),
+        arguments(new int[]{}, 0)
+    );
+
+  }
+
+  @ParameterizedTest
+  @MethodSource("rotationCountInRotatedSortedArray")
+  void rotationCountInRotatedSortedArray(int[] array, int rotationCount) {
+    assertThat(
+        ArrayRotation.rotationCountInRotatedSortedArray(array)).isEqualTo(
+        rotationCount);
+  }
 }

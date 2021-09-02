@@ -6,6 +6,7 @@ import io.lazybird.programmingproblems.commons.annotations.ProgrammingProblem;
 import io.lazybird.programmingproblems.commons.utils.ArrayUtils;
 import io.lazybird.programmingproblems.commons.utils.MathUtils;
 import java.util.Arrays;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -316,7 +317,7 @@ public class ArrayRotation {
    * @return maximum value of Sum( i*arr[i]) with only rotations on given array
    *     allowed.
    */
-  public static int maxOfPositionalSum(@NotNull int[] array) {
+  public static int maxOfPositionalSum(@NotEmpty int[] array) {
 
     int maxSum = 0;
     int elementSum = 0;
@@ -327,16 +328,50 @@ public class ArrayRotation {
     }
 
     int positionalSum = maxSum;
-    for (int i = 0; i < array.length; i++) {
+    for (int j : array) {
 
       positionalSum =
-          positionalSum - elementSum + array[i] + array[i] * (array.length - 1);
+          positionalSum - elementSum + j + j * (array.length - 1);
 
       if (positionalSum > maxSum) {
         maxSum = positionalSum;
       }
     }
     return maxSum;
+  }
+
+  /**
+   * Finds the Rotation Count in clockwise Rotated Sorted array.
+   *
+   * @param array of integers.
+   * @return number of clockwise rotation.
+   */
+  public static int rotationCountInRotatedSortedArray(@NotNull int[] array) {
+    if (array.length <= 1) {
+      return 0;
+    }
+    int s = 0;
+    int e = array.length - 1;
+    int m = 0;
+    while (s < e) {
+
+      if (array[s] < array[e]) {
+        return 0;
+      }
+
+      m = s + (e - s) / 2;
+
+      if (array[m] > array[m + 1]) {
+        return m + 1;
+      }
+
+      if (array[s] < array[m]) {
+        s = m;
+      } else {
+        e = m;
+      }
+    }
+    return m;
   }
 
 
