@@ -308,5 +308,36 @@ public class ArrayRotation {
     }
   }
 
+  /**
+   * Find maximum value of Sum( i*arr[i]) with only rotations on given array
+   * allowed.
+   *
+   * @param array of integers
+   * @return maximum value of Sum( i*arr[i]) with only rotations on given array
+   *     allowed.
+   */
+  public static int maxOfPositionalSum(@NotNull int[] array) {
+
+    int maxSum = 0;
+    int elementSum = 0;
+
+    for (int i = 0; i < array.length; i++) {
+      maxSum += i * array[i];
+      elementSum += array[i];
+    }
+
+    int positionalSum = maxSum;
+    for (int i = 0; i < array.length; i++) {
+
+      positionalSum =
+          positionalSum - elementSum + array[i] + array[i] * (array.length - 1);
+
+      if (positionalSum > maxSum) {
+        maxSum = positionalSum;
+      }
+    }
+    return maxSum;
+  }
+
 
 }

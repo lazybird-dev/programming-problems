@@ -3,6 +3,7 @@ package io.lazybird.programmingproblems.gfg.array;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -88,6 +89,43 @@ class ArrayRotationTest {
         arguments(new int[]{3, 4, 5, 1, 2}, 5, 2),
         arguments(new int[]{3, 4, 5, 1, 2}, 6, -1)
     );
+
+  }
+
+  static Stream<Arguments> maxOfPositionalSum() {
+
+    return Stream.of(arguments(new int[]{1, 2, 3, 4, 5}),
+        arguments(new int[]{1, 2, -3, -4, -5}),
+        arguments(new int[]{-1, 2, -3, 4, 10}),
+        arguments(new int[]{-3, 4, 15, 1, -2}),
+        arguments(new int[]{3, -4, 5, -1, 2}),
+        arguments(new int[]{3, 14, 5, 21, 2}),
+        arguments(new int[]{3, -4, 25, 1, 2})
+    );
+
+  }
+
+  @ParameterizedTest
+  @MethodSource("maxOfPositionalSum")
+  void maxOfPositionalSum(int[] array) {
+
+    int[] tempArray = Arrays.copyOf(array, array.length);
+    int maxSum = Integer.MIN_VALUE;
+
+    for (int i = 0; i < tempArray.length; i++) {
+
+      int currentSum = 0;
+      for (int j = 0; j < tempArray.length; j++) {
+        currentSum += j * tempArray[j];
+      }
+      if (currentSum > maxSum) {
+        maxSum = currentSum;
+      }
+
+      tempArray = ArrayRotation.byJugglingMethod(tempArray, 1);
+    }
+
+    assertThat(ArrayRotation.maxOfPositionalSum(array)).isEqualTo(maxSum);
 
   }
 }
