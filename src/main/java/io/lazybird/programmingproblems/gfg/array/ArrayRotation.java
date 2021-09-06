@@ -14,6 +14,12 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Problems on array rotation.
+ *
+ * <h3>Sources:</h3>
+ * <ol>
+ *   <li>https://www.geeksforgeeks.org/array-data-structure/#rotation</li>
+ *   <li>https://www.geeksforgeeks.org/tag/rotation/</li>
+ * </ol>
  */
 public class ArrayRotation {
 
@@ -445,7 +451,7 @@ public class ArrayRotation {
    * @param array of integers
    * @return maximum hamming distance of all possible array rotation.
    */
-  public static int rotationWithMaximumHammingDistance(@NotEmpty int[] array) {
+  public static int rotationWithMaximumHammingDistance1(@NotEmpty int[] array) {
 
     int hammingDistance = Integer.MIN_VALUE;
 
@@ -463,6 +469,18 @@ public class ArrayRotation {
       }
     }
     return hammingDistance;
+  }
+
+  /**
+   * <p>Find a rotation with maximum hamming distance</p>
+   * <p>https://www.geeksforgeeks.org/find-a-rotation-with-maximum-hamming-distance-set-2/</p>
+   * A rotation with maximum hamming distance.
+   *
+   * @param array of integers
+   * @return maximum hamming distance of all possible array rotation.
+   */
+  public static int rotationWithMaximumHammingDistance2(@NotEmpty int[] array) {
+    return -1;
   }
 
   /**
@@ -523,6 +541,102 @@ public class ArrayRotation {
     ArrayUtils.reverseArray(array, 0, array.length - 1);
 
     return array;
+  }
+
+  /**
+   * URL: https://www.geeksforgeeks.org/rearrange-array-arri/
+   *
+   * @param array to be rearranged
+   */
+  public static void reArrangeArray(@NotEmpty int[] array) {
+    for (int i = 0; i < array.length; i++) {
+      int temp;
+      while (array[i] != -1 && array[i] != i) {
+        temp = array[i];
+        array[i] = array[temp];
+        array[temp] = temp;
+      }
+    }
+  }
+
+  /**
+   * <p>Count rotations required to sort given array in non-increasing
+   * order</p> URL: https://www.geeksforgeeks.org/count-rotations-required-to-sort-given-array-in-non-increasing-order/
+   *
+   * @param array of integers
+   * @return number of anti-clockwise rotation required to sort the array in
+   *     non-increasing order or -1 if array is not sortable.
+   */
+  public static int rotationRequiredToSortArray(@NotEmpty int[] array) {
+
+    if (array.length == 1) {
+      return 0;
+    }
+
+    int pivotIndex = -1;
+    int index = array.length - 1;
+
+    while (index > 0) {
+      if (array[index - 1] < array[index]) {
+        if (pivotIndex == -1) {
+          pivotIndex = index;
+        }
+      } else {
+        if (pivotIndex == -1) {
+          pivotIndex = index - 1;
+        } else {
+          return -1;
+        }
+      }
+      index--;
+    }
+
+    return pivotIndex;
+  }
+
+  /**
+   * https://www.geeksforgeeks.org/check-whether-matrix-t-is-a-result-of-one-or-more-90-rotations-of-matrix-mat/
+   *
+   * @param originalMatrix matrix 1
+   * @param rotatedMatrix  matrix 2
+   * @return true if one matrix is rotation of another else false.
+   */
+  public static boolean isMatrixRotationOfAnother(
+      @NotEmpty int[][] originalMatrix, @NotEmpty int[][] rotatedMatrix) {
+
+    if (originalMatrix.length != rotatedMatrix.length
+        || originalMatrix[0].length != rotatedMatrix[0].length) {
+      return false;
+    }
+
+    boolean[] result = new boolean[4];
+    Arrays.fill(result, true);
+
+    int r = originalMatrix.length - 1;
+    int c = originalMatrix[0].length - 1;
+
+    for (int i = 0; i < originalMatrix.length; i++) {
+      for (int j = 0; j < originalMatrix[i].length; j++) {
+
+        if (result[0] && originalMatrix[i][j] != rotatedMatrix[i][j]) {
+          result[0] = false;
+        }
+
+        if (result[1] && originalMatrix[i][j] != rotatedMatrix[j][i]) {
+          result[1] = false;
+        }
+
+        if (result[2] && originalMatrix[i][j] != rotatedMatrix[i][c - j]) {
+          result[2] = false;
+        }
+
+        if (result[3] && originalMatrix[i][j] != rotatedMatrix[j][r - i]) {
+          result[3] = false;
+        }
+      }
+    }
+
+    return result[0] || result[1] || result[2] || result[3];
   }
 
 
