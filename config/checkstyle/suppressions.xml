@@ -5,6 +5,7 @@
   "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
 <suppressions>
+  <suppress checks="LineLength" files="io.lazybird.programmingproblems.gfg.array.ArrayRotationTest.java"/>
   <!-- can't split long messages between lines -->
   <suppress id="lineLengthXml" files="google_checks\.xml" lines="56,126"/>
   <!-- don't validate generated files -->

@@ -81,6 +81,7 @@ public class ArrayRotation {
    * @param rotateBy no of elements to be rotated
    * @return rotated array
    */
+  @SuppressWarnings("ManualArrayCopy")
   public static int[] usingTempArray(@NotNull int[] array, int rotateBy) {
 
     _LOGGER.atDebug().log("Input: array={}, rotateBy={}",
@@ -90,7 +91,7 @@ public class ArrayRotation {
       return array;
     }
 
-    int[] tempArray = new int[rotateBy];
+    int[] tempArray = Arrays.copyOf(array, rotateBy);
 
     //Copy the n=rotateBy elements in a temp array
     System.arraycopy(array, 0, tempArray, 0, rotateBy);
@@ -145,6 +146,7 @@ public class ArrayRotation {
 
   /**
    * Rotate array using array reversal algorithm.
+   * <p>https://www.geeksforgeeks.org/program-for-array-rotation-continued-reversal-algorithm/</p>
    *
    * @param array    to be rotated
    * @param rotateBy number of places to be rotated.
@@ -173,6 +175,8 @@ public class ArrayRotation {
    * @param array    to be rotated.
    * @param rotateBy number of elements to be rotated.
    * @return rotated array
+   * @see <a href="https://www.geeksforgeeks.org/block-swap-algorithm-for-array-rotation/"
+   *     target="_blank">block-swap-algorithm-for-array-rotation</a>
    */
   public static int[] blockSwapAlgorithm(@NotNull int[] array, int rotateBy) {
 
@@ -196,15 +200,16 @@ public class ArrayRotation {
   }
 
   /**
-   * Returns index of the passed element or -1 if element doesn't exist in
-   * rotated sorted array.
+   * Search an element in a sorted and rotated array.
    *
    * @param array   to be searched.
    * @param element to be searched.
    * @return index of the element or -1 if not found.
+   * @see <a href="https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/">Problem
+   *     Statement @geeksforgeeks.org</a>
    */
-  @ProgrammingProblem(title = "Search an element in a sorted and rotated array",
-      sources = "https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/",
+  @ProgrammingProblem(title = "",
+      sources = "",
       difficultyLevel = BEGINNER)
   public static int searchElementInRotatedSortedArray(@NotNull int[] array,
       int element) {
@@ -322,6 +327,10 @@ public class ArrayRotation {
    * @param array of integers
    * @return maximum value of Sum( i*arr[i]) with only rotations on given array
    *     allowed.
+   * @see <a href="https://www.geeksforgeeks.org/maximum-sum-iarri-among-rotations-given-array/"
+   *     target="_blank">maximum-sum-iarri-among-rotations-given-array</a>
+   * @see <a href="https://www.geeksforgeeks.org/find-maximum-value-of-sum-iarri-with-only-rotations-on-given-array-allowed/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
    */
   public static int maxOfPositionalSum(@NotEmpty int[] array) {
 
@@ -351,6 +360,8 @@ public class ArrayRotation {
    *
    * @param array of integers.
    * @return number of clockwise rotation.
+   * @see <a href="https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/"
+   *     target="_blank">find-rotation-count-rotated-sorted-array</a>
    */
   public static int rotationCountInRotatedSortedArray(@NotEmpty int[] array) {
     if (array.length == 1) {
@@ -386,6 +397,8 @@ public class ArrayRotation {
    * @param array    of integers
    * @param rotateBy places by which array to be left rotated.
    * @return rotated array
+   * @see <a href="https://www.geeksforgeeks.org/quickly-find-multiple-left-rotations-of-an-array/"
+   *     target="_blank">quickly-find-multiple-left-rotations-of-an-array</a>
    */
   public static int[] findMultipleLeftRotationOfArray(@NotNull int[] array,
       int rotateBy) {
@@ -639,5 +652,313 @@ public class ArrayRotation {
     return result[0] || result[1] || result[2] || result[3];
   }
 
+  /**
+   * https://www.geeksforgeeks.org/rotate-a-matrix-clockwise-by-90-degree-without-using-any-extra-space-set-3/
+   *
+   * @param matrix to be rotated
+   * @return rotated matrix
+   */
+  public static int[][] rotateMatrixClockwiseBy90(@NotEmpty int[][] matrix) {
+
+    int r = matrix.length - 1;
+    int c = matrix[0].length - 1;
+
+    int[][] rotatedMatrix = new int[c + 1][];
+
+    for (int i = 0; i <= c; i++) {
+      rotatedMatrix[i] = new int[r + 1];
+      for (int j = 0; j <= r; j++) {
+        rotatedMatrix[i][r - j] = matrix[j][i];
+      }
+
+    }
+
+    return rotatedMatrix;
+  }
+
+
+  /**
+   * Reduce the given Array of [1, N] by rotating left or right based on given *
+   * conditions.
+   *
+   * @param array               to be rotated
+   * @param rotationInstruction instruction array
+   * @return remaining element
+   * @see <a href="https://www.geeksforgeeks.org/reduce-the-given-array-of-1-n-by-rotating-left-or-right-based-on-given-conditions/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   */
+  public static int reduceArrayByRotation(@NotEmpty int[] array,
+      @NotEmpty int[] rotationInstruction) {
+    int s = 0;
+    int e = array.length - 1;
+    return -1;
+  }
+
+  /**
+   * Maximum number of 0s placed consecutively at the start and end in any
+   * rotation of a Binary String.
+   *
+   * @param binaryString binary string
+   * @return number of consecutive zeroes
+   * @see <a href="https://www.geeksforgeeks.org/maximum-number-of-0s-placed-consecutively-at-the-start-and-end-in-any-rotation-of-a-binary-string/"
+   *     target="_blank">Problem Link</a>
+   */
+  public static int maximumConsecutiveZerosAtStartOrEnd(
+      @NotEmpty String binaryString) {
+    int maxZeroSubstringLength = 0;
+    int zeroCount = 0;
+    int index = 0;
+    while (index < binaryString.length() * 2 - 1) {
+
+      if (binaryString.charAt(index % binaryString.length()) == '0') {
+        zeroCount++;
+        maxZeroSubstringLength = Math.max(maxZeroSubstringLength, zeroCount);
+      } else {
+        zeroCount = 0;
+      }
+      index++;
+    }
+    //In case string is all zeroes
+    return Math.min(maxZeroSubstringLength, binaryString.length());
+  }
+
+  /**
+   * Rotate matrix rows.
+   *
+   * @param matrix rows of this given matrix need to be rotated.
+   */
+  public static void rotateMatrixRows(@NotEmpty int[][] matrix) {
+    for (int i = 0; i < matrix.length; i++) {
+      //clockwise  = length - anticlockwise rotation
+      ArrayRotation.byJugglingMethod(matrix[i], matrix[0].length - i);
+    }
+  }
+
+  /**
+   * Modify a string by performing given shift operations.
+   *
+   * @param string     of chars
+   * @param operations operation matrix
+   * @return modified string
+   * @see <a href="https://www.geeksforgeeks.org/modify-a-string-by-performing-given-shift-operations/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   */
+  public static String stringShift(String string, int[][] operations) {
+    int effectiveShift = 0;
+
+    for (int[] operation : operations) {
+      if (operation[0] == 0) {
+        effectiveShift -= operation[1];
+      } else {
+        effectiveShift += operation[1];
+      }
+    }
+
+    String tempString = string.concat(string);
+
+    if (effectiveShift < 0) {
+      tempString = tempString.substring(-effectiveShift,
+          -effectiveShift + string.length());
+    } else if (effectiveShift < 0) {
+      tempString = tempString.substring(string.length() - effectiveShift,
+          effectiveShift + string.length() + 1);
+    }
+
+    return tempString;
+  }
+
+  /**
+   * Lexicographically minimum string rotation.
+   *
+   * @param str given string
+   * @return minimum lexicographic rotation of the string
+   * @see <a href="https://www.geeksforgeeks.org/lexicographically-minimum-string-rotation/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   * @see <a href="https://www.geeksforgeeks.org/lexicographically-smallest-rotated-sequence-set-2/">Problem
+   *     Statement @geeksforgeeks.org</a>
+   * @see <a href="https://en.wikipedia.org/wiki/Lexicographically_minimal_string_rotation"
+   *     target="_blank">Wikipedia
+   *     </a>
+   */
+  public static String lexicographicMinimumOfStringRotation(String str) {
+    String s = str + str;
+    int s1 = 0;
+    int s2 = 0;
+    int wl;
+    int step = 0;
+    while (s2 < str.length()) {
+      wl = 0;
+      step++;
+      s2 = s1 + step;
+      while (s2 + wl < s.length()) {
+        if (s.charAt(s1 + wl) == s.charAt(s2 + wl)) {
+          wl++;
+        } else {
+          if (s.charAt(s1 + wl) < s.charAt(s2 + wl)) {
+            step = s2 - s1 + wl;
+          } else {
+            s1 = s2;
+            step = 0;
+          }
+          break;
+        }
+      }
+    }
+    return s.substring(s1, s1 + str.length());
+  }
+
+  /**
+   * Rotate bits of a number.
+   *
+   * @param n        integer to be rotated.
+   * @param rotateBy number of times integer is to be rotated.
+   * @return integer after performing rotation
+   * @see <a href="https://www.geeksforgeeks.org/rotate-bits-of-an-integer/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   */
+  public static int leftRotateBitOfNumber(int n, int rotateBy) {
+    return (n << rotateBy) | (n >> 32 - rotateBy);
+  }
+
+  /**
+   * Rotate bits of a number.
+   *
+   * @param n        integer to be rotated.
+   * @param rotateBy number of times to be rotated.
+   * @return integer after performing rotation.
+   * @see <a href="https://www.geeksforgeeks.org/rotate-bits-of-an-integer/">Problem
+   *     Statement @geeksforgeeks.org</a>
+   */
+  public static int rightRotateBitOfNumber(int n, int rotateBy) {
+    return (n >> rotateBy) | (n << 32 - rotateBy);
+  }
+
+
+  /**
+   * A Program to check if strings are rotations of each other or not.
+   *
+   * @param originalString a non-null string
+   * @param rotatedString  a non-null string
+   * @return true when rotatedString is a rotation of original string else
+   *     false.
+   * @see <a href="https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   * @see <a href="https://www.geeksforgeeks.org/check-string-can-obtained-rotating-another-string-2-places/"
+   *     target="_blank">Similar Problem</a>
+   * @see <a href="https://www.geeksforgeeks.org/check-rows-matrix-circular-rotations/"
+   *     target="_blank">Similar Problem</a>
+   */
+  public static boolean isStringRotationOfAnother(String originalString,
+      String rotatedString) {
+    return rotatedString.length() == originalString.length()
+        && (rotatedString + rotatedString).contains(originalString);
+  }
+
+  /**
+   * Rotate an image by 90 degree.
+   *
+   * @param imageBuffer to be rotated.
+   * @return array representing 90 degree rotated imageBuffer
+   * @see <a href="https://www.geeksforgeeks.org/turn-an-image-by-90-degree/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   */
+  public static String[][] rotateAnImageBy90Degree(String[][] imageBuffer) {
+    int r = imageBuffer.length;
+    int c = imageBuffer[0].length;
+    String[][] result = new String[c][];
+    for (int i = 0; i < c; i++) {
+      result[i] = new String[r];
+      for (int j = 0; j < r; j++) {
+        result[i][r - j - 1] = imageBuffer[j][i];
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Check if two numbers are bit rotations of each other or not.
+   *
+   * @param actualNumber  number
+   * @param rotatedNumber number's bit rotation
+   * @return true if actualNumber and rotatedNumber are bit rotation of each
+   *     other else false.
+   * @see <a href="https://www.geeksforgeeks.org/check-two-numbers-bit-rotations-not/">Problem
+   *     Statement @geeksforgeeks.org</a>
+   */
+  public static boolean isBitRotationOfOther(long actualNumber,
+      long rotatedNumber) {
+    for (int i = 0; i < 64; i++) {
+      if (((actualNumber << 64 - i) | (actualNumber >> i)) == rotatedNumber) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Left Rotation and Right Rotation of a String.
+   *
+   * @param str      non-null string to be rotated
+   * @param rotateBy number of places to be rotated by.
+   * @see <a href="https://www.geeksforgeeks.org/left-rotation-right-rotation-string-2/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   */
+  public static String[] leftRotateRightRotateString(String str, int rotateBy) {
+    rotateBy = rotateBy % str.length();
+    String[] result = new String[2];
+    result[0] = (str.substring(rotateBy) + str.substring(0, rotateBy));
+    result[1] = str.substring(str.length() - rotateBy) + str.substring(0,
+        str.length() - rotateBy);
+    return result;
+  }
+
+  /**
+   * Count rotations divisible by 4.
+   *
+   * @param str non-empty string representing a large positive integer
+   * @return number of rotation divisible by 4.
+   * @see <a href="https://www.geeksforgeeks.org/count-rotations-divisible-4/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   */
+  public static int numberOfRotationDivisibleBy4(String str) {
+    int count = 0;
+
+    if (str.length() == 1) {
+      count += Integer.parseInt(str) % 4 == 0 ? 1 : 0;
+    } else {
+      count += Integer.parseInt(
+          str.substring(str.length() - 1) + str.charAt(0)) % 4 == 0 ? 1
+          : 0;
+    }
+
+    for (int i = 0; i < str.length() - 1; i++) {
+      count +=
+          Integer.parseInt(str.substring(i, i + 2)) % 4 == 0
+              ? 1 : 0;
+    }
+    return count;
+  }
+
+  /**
+   * Given a square matrix, turn it by 90 degrees in anti-clockwise direction
+   * without using any extra space.
+   *
+   * @param matrix to be rotated
+   * @see <a href="https://www.geeksforgeeks.org/rotate-matrix-90-degree-without-using-extra-space-set-2/"
+   *     target="_blank">Problem Statement @geeksforgeeks.org</a>
+   */
+  public static void rotateMatrixInPlace1(int[][] matrix) {
+    for (int i = 0; i < matrix.length / 2; i++) {
+      int d = matrix.length - 2 * i;
+      int temp;
+      for (int j = 0; j < d - 1; j++) {
+        temp = matrix[i][i + j];
+        matrix[i][i + j] = matrix[i + j][i + d - 1];
+        matrix[i + j][i + d - 1] = matrix[i + d - 1][i + d - 1 - j];
+        matrix[i + d - 1][i + d - 1 - j] = matrix[i + d - 1 - j][i];
+        matrix[i + d - 1 - j][i] = temp;
+      }
+    }
+  }
 
 }
