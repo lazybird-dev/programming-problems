@@ -303,4 +303,11 @@ class ArrayRotationTest {
     assertThat(ArrayRotation.numberOfRotationDivisibleBy8(str)).isEqualTo(
         divisibilityCount);
   }
+
+  @ParameterizedTest
+  @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#rotateMatrixBy180")
+  void rotateMatrixBy180(int[][] actualMatrix, int[][] expectedMatrix) {
+    ArrayRotation.rotateMatrixBy180(actualMatrix);
+    assertThat(actualMatrix).isDeepEqualTo(expectedMatrix);
+  }
 }

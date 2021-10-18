@@ -988,5 +988,35 @@ public class ArrayRotation {
     return count;
   }
 
+  /**
+   * Rotate a Matrix by 180 degree.
+   *
+   * @param matrix matrix to be rotated.
+   * @see <a href="https://www.geeksforgeeks.org/rotate-matrix-180-degree/">Problem
+   *     Statement @geeksforgeeks.org</a>
+   */
+  public static void rotateMatrixBy180(int[][] matrix) {
+    int m = matrix.length;
+    int n = matrix[0].length;
+    int temp;
+    for (int i = 0; i < Math.ceil(m / 2.0); i++) {
+      for (int j = 0; j < n; j++) {
+        temp = matrix[i][j];
+        matrix[i][j] = matrix[m - 1 - i][n - 1 - j];
+        matrix[m - 1 - i][n - 1 - j] = temp;
+      }
+    }
+
+    //handle center row
+    if (m % 2 == 1) {
+      int c = m / 2;
+      for (int i = 0; i < n / 2; i++) {
+        temp = matrix[c][i];
+        matrix[c][i] = matrix[c][n - 1 - i];
+        matrix[c][n - 1 - i] = temp;
+      }
+    }
+  }
+
 
 }
