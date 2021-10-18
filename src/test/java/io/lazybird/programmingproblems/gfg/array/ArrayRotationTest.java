@@ -297,4 +297,10 @@ class ArrayRotationTest {
     fail("Not Implemented");
   }
 
+  @ParameterizedTest
+  @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#numberOfRotationDivisibleBy8")
+  void numberOfRotationDivisibleBy8(String str, int divisibilityCount) {
+    assertThat(ArrayRotation.numberOfRotationDivisibleBy8(str)).isEqualTo(
+        divisibilityCount);
+  }
 }

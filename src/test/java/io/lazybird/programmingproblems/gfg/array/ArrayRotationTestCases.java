@@ -217,7 +217,8 @@ public class ArrayRotationTestCases {
     return Stream.of(Arguments.arguments("8", 1),
         Arguments.arguments("20", 1), Arguments.arguments("13502", 0),
         Arguments.arguments("928160", 4),
-        Arguments.arguments("4834", 2));
+        Arguments.arguments("4834", 2),
+        Arguments.arguments("44", 2));
   }
 
   static Stream<Arguments> rotateMatrixInPlace() {
@@ -239,5 +240,13 @@ public class ArrayRotationTestCases {
             new int[][]{{6, 12, 18, 24, 30, 36}, {5, 11, 17, 23, 29, 35},
                 {4, 10, 16, 22, 28, 34}, {3, 9, 15, 21, 27, 33},
                 {2, 8, 14, 20, 26, 32}, {1, 7, 13, 19, 25, 31}}));
+  }
+
+  static Stream<Arguments> numberOfRotationDivisibleBy8() {
+    return Stream.of(Arguments.arguments("8", 1),
+        Arguments.arguments("40", 1), Arguments.arguments("13502", 0),
+        Arguments.arguments("43262488612", 4),
+        Arguments.arguments("88", 2),
+        Arguments.arguments("800", 3));
   }
 }

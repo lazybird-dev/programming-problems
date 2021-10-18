@@ -926,15 +926,12 @@ public class ArrayRotation {
     if (str.length() == 1) {
       count += Integer.parseInt(str) % 4 == 0 ? 1 : 0;
     } else {
-      count += Integer.parseInt(
-          str.substring(str.length() - 1) + str.charAt(0)) % 4 == 0 ? 1
-          : 0;
-    }
-
-    for (int i = 0; i < str.length() - 1; i++) {
-      count +=
-          Integer.parseInt(str.substring(i, i + 2)) % 4 == 0
-              ? 1 : 0;
+      String temp = str + str;
+      for (int i = 0; i < str.length(); i++) {
+        count +=
+            Integer.parseInt(temp.substring(i, i + 2)) % 4 == 0
+                ? 1 : 0;
+      }
     }
     return count;
   }
@@ -960,5 +957,36 @@ public class ArrayRotation {
       }
     }
   }
+
+
+  /**
+   * Count rotations divisible by 8.
+   *
+   * @param str given string.
+   * @return number of rotations divisible by 8.
+   * @see <a href="https://www.geeksforgeeks.org/count-rotations-divisible-8/">Problem
+   *     Statement @geeksforgeeks.org</a>
+   */
+  public static int numberOfRotationDivisibleBy8(String str) {
+
+    int count = 0;
+
+    count += str.length() == 1 && Integer.parseInt(str) % 8 == 0 ? 1 : 0;
+
+    if (str.length() == 2) {
+      count += Integer.parseInt(str) % 8 == 0 ? 1 : 0;
+      count +=
+          ((str.charAt(1) - '0') * 10 + str.charAt(0) - '0') % 8 == 0 ? 1 : 0;
+    }
+
+    if (str.length() > 2) {
+      String temp = str + str;
+      for (int i = 0; i < str.length(); i++) {
+        count += Integer.parseInt(temp.substring(i, i + 3)) % 8 == 0 ? 1 : 0;
+      }
+    }
+    return count;
+  }
+
 
 }
