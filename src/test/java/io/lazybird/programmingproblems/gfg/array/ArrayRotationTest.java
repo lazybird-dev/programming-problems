@@ -341,7 +341,16 @@ class ArrayRotationTest {
   @ParameterizedTest
   @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#sortRotatedSortedArray")
   void sortRotatedSortedArray(int[] actualArray, int[] expectedArray) {
-    ArrayRotation.sortRotatedSortedArray(actualArray);;
+    ArrayRotation.sortRotatedSortedArray(actualArray);
+    ;
     assertThat(actualArray).containsExactly(expectedArray);
+  }
+
+  @ParameterizedTest
+  @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#rotateMatrix")
+  void rotateMatrix(int[][] actualMatrix, int numberOfRotation,
+      int[][] expectedMatrix) {
+    ArrayRotation.rotateMatrix(actualMatrix, numberOfRotation);
+    assertThat(actualMatrix).isDeepEqualTo(expectedMatrix);
   }
 }

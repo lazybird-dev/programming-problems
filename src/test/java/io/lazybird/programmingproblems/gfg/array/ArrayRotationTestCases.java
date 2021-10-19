@@ -279,4 +279,15 @@ public class ArrayRotationTestCases {
         Arguments.arguments(new int[]{3, 4, 5, 1, 2}, new int[]{1, 2, 3, 4, 5}),
         Arguments.arguments(new int[]{1, 2}, new int[]{1, 2}));
   }
+
+  static Stream<Arguments> rotateMatrix() {
+    return Stream.of(
+        Arguments.arguments(
+            new int[][]{new int[]{12, 23, 24}, new int[]{45, 56, 67},
+                new int[]{78, 89, 91}}, 2,
+            new int[][]{new int[]{23, 24, 12}, new int[]{56, 67, 45},
+                new int[]{89, 91, 78}}),
+        Arguments.arguments(new int[][]{new int[]{1, 2}, new int[]{3, 4}}, 2,
+            new int[][]{new int[]{1, 2}, new int[]{3, 4}}));
+  }
 }

@@ -146,11 +146,14 @@ public class ArrayRotation {
 
   /**
    * Rotate array using array reversal algorithm.
-   * <p>https://www.geeksforgeeks.org/program-for-array-rotation-continued-reversal-algorithm/</p>
    *
    * @param array    to be rotated
    * @param rotateBy number of places to be rotated.
    * @return rotated array
+   * @see <a href="https://www.geeksforgeeks.org/program-for-array-rotation-continued-reversal-algorithm/">Problem
+   *     Statement</a>
+   * @see <a href="https://www.geeksforgeeks.org/reversal-algorithm-right-rotation-array/">Similar
+   *     Problem</a>
    */
   public static int[] usingReversalAlgorithm(@NotNull int[] array,
       int rotateBy) {
@@ -423,12 +426,13 @@ public class ArrayRotation {
   }
 
   /**
-   * https://www.geeksforgeeks.org/find-minimum-element-in-a-sorted-and-rotated-array/
    * Returns the minimum element of a rotated sorted array. Array must not have
    * duplicate elements.
    *
    * @param array rotated and sorted array without any duplicates
    * @return minimum element of the array
+   * @see <a href="https://www.geeksforgeeks.org/find-minimum-element-in-a-sorted-and-rotated-array/">Problem
+   *     Statement</a>
    */
   public static int minimumInRotatedSortedArray(@NotEmpty int[] array) {
 
@@ -465,6 +469,8 @@ public class ArrayRotation {
    *
    * @param array of integers
    * @return maximum hamming distance of all possible array rotation.
+   * @see <a href="https://www.geeksforgeeks.org/find-a-rotation-with-maximum-hamming-distance/">Problem
+   *     Statement</a>
    */
   public static int rotationWithMaximumHammingDistance1(@NotEmpty int[] array) {
 
@@ -499,11 +505,13 @@ public class ArrayRotation {
   }
 
   /**
-   * https://www.geeksforgeeks.org/queries-left-right-circular-shift-array/
+   * Queries on Left and Right Circular shift on array.
    *
    * @param array   of integer
    * @param queries queries to be performed on array
    * @return sum of the elements over a range.
+   * @see <a href="https://www.geeksforgeeks.org/queries-left-right-circular-shift-array/">Problem
+   *     Statement</a>
    */
   public static int queriesOnArray(@NotEmpty int[] array,
       @NotEmpty int[][] queries) {
@@ -1108,7 +1116,23 @@ public class ArrayRotation {
       ArrayUtils.reverseArray(array, pivotIndex, array.length - 1);
       ArrayUtils.reverseArray(array);
     }
+  }
 
+  /**
+   * Rotate the matrix right by K times.
+   *
+   * @param matrix
+   * @param numberOfTimes
+   * @return
+   * @see <a href="https://www.geeksforgeeks.org/rotate-matrix-right-k-times/">Problem
+   *     Statement</a>
+   */
+  public static int[][] rotateMatrix(int[][] matrix, int numberOfTimes) {
+    for (int i = 0; i < matrix.length; i++) {
+      ArrayRotation.usingReversalAlgorithm(matrix[i],
+          matrix[i].length - numberOfTimes);
+    }
+    return matrix;
   }
 
 }
