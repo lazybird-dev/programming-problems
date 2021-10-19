@@ -399,6 +399,8 @@ public class ArrayRotation {
    * @return rotated array
    * @see <a href="https://www.geeksforgeeks.org/quickly-find-multiple-left-rotations-of-an-array/"
    *     target="_blank">quickly-find-multiple-left-rotations-of-an-array</a>
+   * @see <a href="https://www.geeksforgeeks.org/print-left-rotation-array/">Print
+   *     left rotation of array in O(n) time and O(1) space</a>
    */
   public static int[] findMultipleLeftRotationOfArray(@NotNull int[] array,
       int rotateBy) {
@@ -542,6 +544,10 @@ public class ArrayRotation {
    * @param array   of integers to be split.
    * @param splitBy first-half length
    * @return resulting array
+   * @see <a href="https://www.geeksforgeeks.org/split-array-add-first-part-end/">Split
+   *     the array and add the first part to the end</a>
+   * @see <a href="https://www.geeksforgeeks.org/split-the-array-and-add-the-first-part-to-the-end-set-2/">Split
+   *     the array and add the first part to the end | Set 2</a>
    */
   public static int[] splitFirstPartAndAddItToBack(@NotEmpty int[] array,
       int splitBy) {
@@ -1018,5 +1024,91 @@ public class ArrayRotation {
     }
   }
 
+  /**
+   * Rotate a Matrix by 180 degree.
+   * <p>Using transpose method</p>
+   *
+   * @param matrix matrix to be rotated.
+   * @see <a href="https://www.geeksforgeeks.org/rotate-matrix-180-degree/">Problem
+   *     Statement @geeksforgeeks.org</a>
+   * @see {@link #rotateMatrixBy180(int[][])}
+   */
+  public static void rotateMatrixBy180UsingTranspose(int[][] matrix) {
+
+  }
+
+  /**
+   * Minimum move to end operations to make all strings equal.
+   *
+   * @param stringPermutations permutations of a string
+   * @return minimum number of rotations to make all strings equal.
+   * @see <a href="https://www.geeksforgeeks.org/minimum-move-end-operations-make-strings-equal/">Problem
+   *     Statement @geeksforgeeks.org</a>
+   */
+  public static int numberOfMinimumRotationsToMakeEqualStrings(
+      String[] stringPermutations) {
+    int minimumRotation = 0;
+
+    int[] startIndices = new int[stringPermutations.length];
+    startIndices[0] = 0;
+
+    int[] sumIndices = new int[stringPermutations.length];
+    sumIndices[0] = 0;
+
+    int n = stringPermutations[0].length();
+
+    String temp = stringPermutations[0] + stringPermutations[0];
+    for (int i = 1; i < n; i++) {
+      startIndices[i] = temp.indexOf(stringPermutations[i]);
+      minimumRotation += startIndices[i];
+      sumIndices[i] += startIndices[i] + startIndices[i - 1];
+    }
+
+    int currentMinimum = minimumRotation;
+    for (int i = 1; i < n; i++) {
+      //currentMinimum - startIndices[i] + (i*n - sumIndices[i-1]) + (T - sumIndices[i] - (n-i)*startIndices[i]
+    }
+
+    return minimumRotation;
+  }
+
+  /**
+   * Find element at given index after a number of rotations.
+   *
+   * @param array  to be rotated
+   * @param ranges ranges for right rotation.
+   * @param index  array[index] to be returned.
+   * @return elememt at array[index].
+   * @see <a href="https://www.geeksforgeeks.org/find-element-given-index-number-rotations/">Find
+   *     element at given index after a number of rotations.</a>
+   */
+  public static int elementAtIndexAfterNumberOfRotations(int[] array,
+      int[] ranges, int index) {
+    return -1;
+  }
+
+  /**
+   * Sort a Rotated Sorted Array.
+   *
+   * @param array
+   * @see <a href="https://www.geeksforgeeks.org/sort-rotated-sorted-array/">Problem
+   *     Statement @geeksforgeeks.org</a>
+   */
+  public static void sortRotatedSortedArray(int[] array) {
+
+    int pivotIndex = -1;
+    for (int i = 1; i < array.length - 1; i++) {
+      if (array[i - 1] > array[i]) {
+        pivotIndex = i;
+      }
+    }
+
+    if (pivotIndex != -1) {
+      ArrayUtils.reverseArray(array, 0, pivotIndex - 1);
+      ArrayUtils.reverseArray(array, pivotIndex, array.length - 1);
+      ArrayUtils.reverseArray(array);
+    }
+
+  }
 
 }

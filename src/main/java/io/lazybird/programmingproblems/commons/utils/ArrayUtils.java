@@ -19,7 +19,7 @@ public class ArrayUtils {
     if (array.length <= 1) {
       return;
     }
-    reverseArray(array, 0, array.length);
+    reverseArray(array, 0, array.length - 1);
   }
 
   /**

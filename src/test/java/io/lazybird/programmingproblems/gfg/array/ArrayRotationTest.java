@@ -310,4 +310,38 @@ class ArrayRotationTest {
     ArrayRotation.rotateMatrixBy180(actualMatrix);
     assertThat(actualMatrix).isDeepEqualTo(expectedMatrix);
   }
+
+  @Disabled("Not implemented yet.")
+  @ParameterizedTest
+  @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#rotateMatrixBy180")
+  void rotateMatrixBy180UsingTranspose(int[][] actualMatrix,
+      int[][] expectedMatrix) {
+    ArrayRotation.rotateMatrixBy180UsingTranspose(actualMatrix);
+    fail("Not implemented yet");
+  }
+
+  @Disabled("Not implemented yet.")
+  @ParameterizedTest
+  @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#numberOfMinimumRotationsToMakeEqualStrings")
+  void numberOfMinimumRotationsToMakeEqualStrings(String[] stringPermutations,
+      int numberOfRotation) {
+    assertThat(ArrayRotation.numberOfMinimumRotationsToMakeEqualStrings(
+        stringPermutations)).isEqualTo(numberOfRotation);
+  }
+
+  @Disabled("Not implemented yet.")
+  @ParameterizedTest
+  @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#elementAtIndexAfterNumberOfRotations")
+  void elementAtIndexAfterNumberOfRotations(int[] array, int[] ranges,
+      int index, int expectedElement) {
+    assertThat(ArrayRotation.elementAtIndexAfterNumberOfRotations(array, ranges,
+        index)).isEqualTo(expectedElement);
+  }
+
+  @ParameterizedTest
+  @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#sortRotatedSortedArray")
+  void sortRotatedSortedArray(int[] actualArray, int[] expectedArray) {
+    ArrayRotation.sortRotatedSortedArray(actualArray);;
+    assertThat(actualArray).containsExactly(expectedArray);
+  }
 }

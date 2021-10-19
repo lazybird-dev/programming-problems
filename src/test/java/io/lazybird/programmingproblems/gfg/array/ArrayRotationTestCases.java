@@ -259,4 +259,24 @@ public class ArrayRotationTestCases {
             new int[][]{{6, 5, 4, 3}, {2, 1, 0, 9}, {8, 7, 6, 5},
                 {4, 3, 2, 1}}));
   }
+
+  static Stream<Arguments> numberOfMinimumRotationsToMakeEqualStrings() {
+    return Stream.of(
+        Arguments.arguments(new String[]{"xzzwo", "zwoxz", "zzwox", "xzzwo"},
+            5),
+        Arguments.arguments(new String[]{"kc", "kc", "kc"}, 0),
+        Arguments.arguments(new String[]{"molzv", "lzvmo"}, 2));
+  }
+
+  static Stream<Arguments> elementAtIndexAfterNumberOfRotations() {
+    return Stream.of(
+        Arguments.arguments(new int[]{}, new int[][]{new int[]{}}, 1, 1));
+  }
+
+  static Stream<Arguments> sortRotatedSortedArray() {
+    return Stream.of(
+        Arguments.arguments(new int[]{1, 2, 3, 4, 5}, new int[]{1, 2, 3, 4, 5}),
+        Arguments.arguments(new int[]{3, 4, 5, 1, 2}, new int[]{1, 2, 3, 4, 5}),
+        Arguments.arguments(new int[]{1, 2}, new int[]{1, 2}));
+  }
 }
