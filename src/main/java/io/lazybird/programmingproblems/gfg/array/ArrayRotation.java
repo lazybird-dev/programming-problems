@@ -861,6 +861,8 @@ public class ArrayRotation {
    *     target="_blank">Similar Problem</a>
    * @see <a href="https://www.geeksforgeeks.org/check-rows-matrix-circular-rotations/"
    *     target="_blank">Similar Problem</a>
+   * @see <a href="https://www.geeksforgeeks.org/check-strings-rotations-not-set-2/">KMP
+   *     algorithm’s lps</a>
    */
   public static boolean isStringRotationOfAnother(String originalString,
       String rotatedString) {

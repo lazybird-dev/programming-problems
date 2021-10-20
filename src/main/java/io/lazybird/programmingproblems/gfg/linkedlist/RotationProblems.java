@@ -35,4 +35,12 @@ public class RotationProblems {
     return -1;
   }
 
+  /**
+   * @see <a href="https://www.geeksforgeeks.org/rotate-doubly-linked-list-n-nodes/">Problem
+   *     Statement</a>
+   */
+  public static void rotateDoublyLinkedList() {
+
+  }
+
 }
