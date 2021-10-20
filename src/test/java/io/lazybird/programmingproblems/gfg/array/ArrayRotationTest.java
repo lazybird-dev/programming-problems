@@ -353,4 +353,11 @@ class ArrayRotationTest {
     ArrayRotation.rotateMatrix(actualMatrix, numberOfRotation);
     assertThat(actualMatrix).isDeepEqualTo(expectedMatrix);
   }
+
+  @ParameterizedTest
+  @MethodSource("io.lazybird.programmingproblems.gfg.array.ArrayRotationTestCases#isArrayRotatedAndSorted")
+  void isArrayRotatedAndSorted(int[] array, boolean isRotatedAndSorted) {
+    assertThat(ArrayRotation.isArrayRotatedAndSorted(array)).isEqualTo(
+        isRotatedAndSorted);
+  }
 }

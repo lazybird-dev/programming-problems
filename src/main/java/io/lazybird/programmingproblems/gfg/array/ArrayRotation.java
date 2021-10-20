@@ -1137,4 +1137,31 @@ public class ArrayRotation {
     return matrix;
   }
 
+  /**
+   * Check if an array is sorted and rotated.
+   *
+   * @param array given array.
+   * @return true if array is rotated and sorted.
+   * @see <a href="https://www.geeksforgeeks.org/check-if-an-array-is-sorted-and-rotated/">Problem
+   *     Statement</a>
+   */
+  public static boolean isArrayRotatedAndSorted(int[] array) {
+    int pivotIndex = -1;
+    for (int i = 0; i < array.length - 1; i++) {
+      if (array[i + 1] < array[i]) {
+        pivotIndex = i + 1;
+        break;
+      }
+    }
+    if (pivotIndex == -1) {
+      return false;
+    }
+    for (int i = pivotIndex; i < pivotIndex + array.length - 1; i++) {
+      if (array[(i + 1) % array.length] < array[i % array.length]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
 }

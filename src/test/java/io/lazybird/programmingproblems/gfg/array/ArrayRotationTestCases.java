@@ -290,4 +290,12 @@ public class ArrayRotationTestCases {
         Arguments.arguments(new int[][]{new int[]{1, 2}, new int[]{3, 4}}, 2,
             new int[][]{new int[]{1, 2}, new int[]{3, 4}}));
   }
+
+  static Stream<Arguments> isArrayRotatedAndSorted() {
+    return Stream.of(Arguments.arguments(new int[]{3, 4, 5, 1, 2}, true),
+        Arguments.arguments(new int[]{7, 9, 11, 12, 5}, true),
+        Arguments.arguments(new int[]{1, 2, 3}, false),
+        Arguments.arguments(new int[]{3, 4, 6, 1, 2, 5}, false),
+        Arguments.arguments(new int[]{3, 4, 6, 5}, false));
+  }
 }
